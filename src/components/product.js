@@ -20,6 +20,7 @@ class BlogPostTemplate extends React.Component {
             <Img
               alt={post.title}
               fluid={post.heroImage.fluid}
+              style={{ maxWidth: '400px' }}
             />
           </div>
           <div className="wrapper">
@@ -53,7 +54,7 @@ export const pageQuery = graphql`
       publishDate(formatString: "MMMM Do, YYYY")
       line1
       heroImage {
-        fluid(maxWidth: 1180, background: "rgb:000000") {
+        fluid(maxWidth: 400, background: "rgb:ffffff") {
           ...GatsbyContentfulFluid_tracedSVG
         }
       }
