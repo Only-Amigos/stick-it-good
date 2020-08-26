@@ -2,8 +2,8 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import get from 'lodash/get'
-import Img from 'gatsby-image'
 import Layout from '../components/layout'
+import Product from '../components/product'
 
 // import heroStyles from '../components/hero.module.css'
 
@@ -17,15 +17,13 @@ class ProductDetailsTemplate extends React.Component {
         <div style={{ background: '#fff' }}>
           <Helmet title={`${post.title} | ${siteTitle}`} />
           <div>
-            <Img
-              alt={post.title}
-              fluid={post.heroImage.fluid}
-              style={{ maxWidth: '400px' }}
+            <Product
+              img={post.heroImage.fluid}
+              title={post.title}
+              price={post.line1}
             />
           </div>
           <div className="wrapper">
-            <h1 className="section-headline">{post.title}</h1>
-            <p>{post.line1}</p>
             <p
               style={{
                 display: 'block',
