@@ -7,7 +7,7 @@ import Layout from '../components/layout'
 
 // import heroStyles from '../components/hero.module.css'
 
-class BlogPostTemplate extends React.Component {
+class ProductDetailsTemplate extends React.Component {
   render() {
     const post = get(this.props, 'data.contentfulBlogPost')
     const siteTitle = get(this.props, 'data.site.siteMetadata.title')
@@ -45,7 +45,7 @@ class BlogPostTemplate extends React.Component {
   }
 }
 
-export default BlogPostTemplate
+export default ProductDetailsTemplate
 
 export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!) {

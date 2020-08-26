@@ -1,20 +1,20 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
 
-const BlogPage = ({ data }) => (
+const ProductListPage = ({ data }) => (
   <div>
-    <h1>Blog</h1>
+    <h1>List of Products</h1>
     <ul>
       {data.allContentfulBlogPost.edges.map(({ node, index }) => (
         <li key={index}>
-          <Link to={`/blog/${node.slug}`}>{node.title}</Link>
+          <Link to={`/product/${node.slug}`}>{node.title}</Link>
         </li>
       ))}
     </ul>
   </div>
 )
 
-export default BlogPage
+export default ProductListPage
 
 export const query = graphql`
   {
