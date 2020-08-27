@@ -2,15 +2,15 @@ import PropTypes from "prop-types"
 import React from "react"
 import Img from 'gatsby-image'
 
-const Product = ({ img, title, price }) => (
+const Product = ({ image, name, price }) => (
   <div className="product-item-container">
     <Img
-      fluid={img}
-      alt={title}
-      style={{ maxWidth: '400px' }}
+      fluid={image}
+      alt={name}
+      style={{ maxWidth: '300px' }}
     />
     <div className="product-item-details">
-      <h3>{title}</h3>
+      <h3>{name}</h3>
       <span>$ </span>
       <span>{price}</span>
     </div>
@@ -18,8 +18,8 @@ const Product = ({ img, title, price }) => (
 )
 
 Product.propTypes = {
-  img: PropTypes.object,
-  title: PropTypes.string,
+  image: PropTypes.object,
+  name: PropTypes.string,
   price: PropTypes.string,
 }
 

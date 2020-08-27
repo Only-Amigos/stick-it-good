@@ -5,9 +5,9 @@ const ProductListPage = ({ data }) => (
   <div>
     <h1>List of Products</h1>
     <ul>
-      {data.allContentfulBlogPost.edges.map(({ node, index }) => (
+      {data.allContentfulProduct.edges.map(({ node, index }) => (
         <li key={index}>
-          <Link to={`/product/${node.slug}`}>{node.title}</Link>
+          <Link to={`/product/${node.slug}`}>{node.name}</Link>
         </li>
       ))}
     </ul>
@@ -18,10 +18,10 @@ export default ProductListPage
 
 export const query = graphql`
   {
-    allContentfulBlogPost(sort: { fields: [updatedAt] }) {
+    allContentfulProduct(sort: {fields: name}) {
       edges {
         node {
-          title
+          name
           slug
         }
       }

@@ -10,10 +10,10 @@ exports.createPages = ({ graphql, actions }) => {
       graphql(
         `
           {
-            allContentfulBlogPost {
+            allContentfulProduct {
               edges {
                 node {
-                  title
+                  name
                   slug
                 }
               }
@@ -26,13 +26,13 @@ exports.createPages = ({ graphql, actions }) => {
           reject(result.errors)
         }
 
-        const posts = result.data.allContentfulBlogPost.edges
-        posts.forEach(post => {
+        const products = result.data.allContentfulProduct.edges
+        products.forEach(product => {
           createPage({
-            path: `/product/${post.node.slug}/`,
+            path: `/product/${product.node.slug}/`,
             component: productDetails,
             context: {
-              slug: post.node.slug,
+              slug: product.node.slug,
             },
           })
         })

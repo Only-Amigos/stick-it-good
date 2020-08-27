@@ -1,5 +1,5 @@
 import React from 'react'
-import { graphql } from 'gatsby'
+import { graphql, Link } from "gatsby"
 import { Helmet } from 'react-helmet'
 import get from 'lodash/get'
 import Layout from '../components/layout'
@@ -9,28 +9,22 @@ import Product from '../components/product'
 
 class ProductDetailsTemplate extends React.Component {
   render() {
-    const post = get(this.props, 'data.contentfulBlogPost')
+    const product = this.props.data.contentfulProduct;
     const siteTitle = get(this.props, 'data.site.siteMetadata.title')
 
     return (
       <Layout location={this.props.location}>
         <div style={{ background: '#fff' }}>
-          <Helmet title={`${post.title} | ${siteTitle}`} />
+          <Helmet title={`${product.name} | ${siteTitle}`} />
+          <Link to={`/productList`}>List of Products</Link>
           <div>
             <Product
-              img={post.heroImage.fluid}
-              title={post.title}
-              price={post.line1}
+              image={product.image.fluid}
+              name={product.name}
+              price={product.price}
             />
           </div>
           <div className="wrapper">
-            <p
-              style={{
-                display: 'block',
-              }}
-            >
-              {post.publishDate}
-            </p>
             <div
               // dangerouslySetInnerHTML={{
               //   __html: post.body.childMarkdownRemark.html,
@@ -45,15 +39,21 @@ class ProductDetailsTemplate extends React.Component {
 
 export default ProductDetailsTemplate
 
+// Image options examples
+// https://github.com/gatsbyjs/gatsby/tree/master/packages/gatsby-image
+
+// ...GatsbyContentfulFluid // adds a blur up effect while image is loading
+// ...GatsbyContentfulFluid_noBase64  // removes the blur up effect while image is loading
+// ...GatsbyContentfulFluid_tracedSVG  // adds a traced placeholder SVGs while the image is loading
+
 export const pageQuery = graphql`
-  query BlogPostBySlug($slug: String!) {
-    contentfulBlogPost(slug: { eq: $slug }) {
-      title
-      publishDate(formatString: "MMMM Do, YYYY")
-      line1
-      heroImage {
-        fluid(maxWidth: 400, background: "rgb:ffffff") {
-          ...GatsbyContentfulFluid_tracedSVG
+  query ProductBySlug($slug: String!) {
+    contentfulProduct(slug: { eq: $slug }) {
+      name
+      price
+      image {
+        fluid(maxWidth: 400) {
+          ...GatsbyContentfulFluid_noBase64
         }
       }
     }
