@@ -2,7 +2,7 @@ import PropTypes from "prop-types"
 import React from "react"
 import Img from 'gatsby-image'
 
-const Product = ({ image, name, price }) => (
+const Product = ({ image, name, price, desc, sizes }) => (
   <div className="product-item-container">
     <Img
       fluid={image}
@@ -13,6 +13,12 @@ const Product = ({ image, name, price }) => (
       <h3>{name}</h3>
       <span>$ </span>
       <span>{price}</span>
+      <p>{desc}</p>
+      <ul>
+        {sizes.map(size => (
+          <li>{size}</li>
+        ))}
+      </ul>
     </div>
   </div>
 )
@@ -20,7 +26,9 @@ const Product = ({ image, name, price }) => (
 Product.propTypes = {
   image: PropTypes.object,
   name: PropTypes.string,
-  price: PropTypes.string,
+  price: PropTypes.number,
+  desc: PropTypes.string,
+  sizes: PropTypes.array,
 }
 
 export default Product

@@ -22,6 +22,8 @@ class ProductDetailsTemplate extends React.Component {
               image={product.image.fluid}
               name={product.name}
               price={product.price}
+              desc={product.description.description}
+              sizes={product.sizes}
             />
           </div>
           <div className="wrapper">
@@ -56,6 +58,10 @@ export const pageQuery = graphql`
           ...GatsbyContentfulFluid_noBase64
         }
       }
+      description {
+        description
+      }
+      sizes
     }
   }
 `
