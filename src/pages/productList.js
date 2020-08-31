@@ -1,8 +1,12 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
 
+import Layout from "../components/layout"
+import SEO from "../components/seo"
+
 const ProductListPage = ({ data }) => (
-  <div>
+  <Layout>
+    <SEO title="Product List" />
     <h1 className="text-3xl text-blue-600">List of Products</h1>
     <ul>
       {data.allContentfulProduct.edges.map(({ node, index }) => (
@@ -11,7 +15,7 @@ const ProductListPage = ({ data }) => (
         </li>
       ))}
     </ul>
-  </div>
+  </Layout>
 )
 
 export default ProductListPage

@@ -1,24 +1,36 @@
 import React from "react"
-import { Link } from "gatsby"
+import { graphql, Link } from "gatsby"
 
 import Layout from "../components/layout"
-import Image from "../components/image"
+// import Image from "../components/image"
 import SEO from "../components/seo"
 import "../styles/main.scss"
 
-const IndexPage = () => (
+const IndexPage = ({ data }) => (
   <Layout>
     <SEO title="Home" />
-    <h1 className="text-4xl oxle-pink">Hi people</h1>
-    <p className="text-xl text-orange-600">Welcome to your new Gatsby site.</p>
-    <p className="text-xl text-green-400">Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link> <br />
-    <Link to="/productList/">Go to list of products</Link> <br />
-    <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
+    <h1 className="text-3xl text-blue-600">List of Products</h1>
+    <ul>
+      {data.allContentfulProduct.edges.map(({ node, index }) => (
+        <li key={index}>
+          <Link className="text-orange-600" to={`/product/${node.slug}`}>{node.name}</Link>
+        </li>
+      ))}
+    </ul>
   </Layout>
 )
 
 export default IndexPage
+
+export const query = graphql`
+  {
+    allContentfulProduct(sort: {fields: name}) {
+      edges {
+        node {
+          name
+          slug
+        }
+      }
+    }
+  }
+`

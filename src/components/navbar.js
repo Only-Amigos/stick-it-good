@@ -4,7 +4,6 @@ import React from "react"
 
 const Navbar = () => (
   <nav>
-    <h2>Hello!</h2>
   </nav>
 )
 
