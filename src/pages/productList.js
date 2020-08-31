@@ -3,11 +3,11 @@ import { graphql, Link } from "gatsby"
 
 const ProductListPage = ({ data }) => (
   <div>
-    <h1>List of Products</h1>
+    <h1 className="text-3xl text-blue-600">List of Products</h1>
     <ul>
       {data.allContentfulProduct.edges.map(({ node, index }) => (
         <li key={index}>
-          <Link to={`/product/${node.slug}`}>{node.name}</Link>
+          <Link className="text-orange-600" to={`/product/${node.slug}`}>{node.name}</Link>
         </li>
       ))}
     </ul>

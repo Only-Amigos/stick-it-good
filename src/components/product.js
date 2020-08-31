@@ -10,7 +10,7 @@ const Product = ({ image, name, price, desc, sizes }) => (
       style={{ maxWidth: '300px' }}
     />
     <div className="product-item-details">
-      <h3>{name}</h3>
+      <h3 className="text-3xl text-purple-600">{name}</h3>
       <span>$ </span>
       <span>{price}</span>
       <p>{desc}</p>
