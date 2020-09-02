@@ -10,16 +10,18 @@ const IndexPage = ({ data }) => (
   <Layout>
     <SEO title="Home" />
     <div>
-      <h1 className="text-center text-3xl text-gray-700 py-4">Animated Sticker Page</h1>
-      <ul className="grid grid-cols-4 gap-4 pb-12">
+      <h1 className="text-center text-4xl font-headline font-semibold uppercase text-grey-700 py-4">Animated Sticker Page</h1>
+      <ul className="grid grid-cols-4 gap-4 pb-6">
         {data.allContentfulProduct.edges.map(({ node }, idx) => (
-          <li className="border-2 border-orange-200" key={idx}>
+          <li className="bg-orange-100 border-2 border-orange-200" key={idx}>
             <Link to={`/product/${node.slug}`}>
-              <Img className="m-3"
-                fluid={node.image.fluid}
-                alt={node.name}
-              />
-              <div className="text-center text-gray-700 bg-orange-100 border-orange-200 border-t-2 p-3">
+              <div className="bg-white p-3">
+                <Img
+                  fluid={node.image.fluid}
+                  alt={node.name}
+                />
+              </div>
+              <div className="text-center text-grey-700 border-orange-200 border-t-2 p-1">
                 <p className="text-l">{node.name}</p>
                 <span>$ </span>
                 <span>{node.price}</span>

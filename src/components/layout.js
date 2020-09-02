@@ -27,7 +27,7 @@ const Layout = ({ children }) => {
     <>
       <Navbar />
       <Header siteTitle={data.site.siteMetadata.title} />
-      <div className="container mx-auto px-16">
+      <div className="container mx-auto px-16 pt-20">
         <main>{children}</main>
         <footer>
           © {new Date().getFullYear()}, Built with
