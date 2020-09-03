@@ -38,6 +38,8 @@ module.exports = {
       },
     },
   },
-  variants: {},
+  variants: {
+    borderWidth: ['responsive', 'last'],
+  },
   plugins: [],
 }

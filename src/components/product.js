@@ -2,6 +2,26 @@ import PropTypes from "prop-types"
 import React from "react"
 import Img from 'gatsby-image'
 
+const openDropdown = (() => {
+  const dropdownMenu = document.querySelector(".product__dropdown--menu");
+  dropdownMenu.classList.toggle("hidden");
+})
+
+const updateSelection = (id => {
+  const sizeSelection = document.querySelector(".product__size--selection");
+  const sizes = document.querySelectorAll(".product__size--item");
+  [...sizes].forEach((size, idx) => {
+    console.log(size)
+    console.log(size.innerText)
+    if (id === idx) {
+      sizeSelection.innerText = size.innerText;
+      console.log(size.parentElement);
+      size.parentElement.classList.add("hidden");
+    }
+  })
+})
+
+
 const Product = ({ image, name, price, desc, sizes }) => (
   <div className="flex mx-12 pb-12">
     {/* Image, Description */}
@@ -23,16 +43,25 @@ const Product = ({ image, name, price, desc, sizes }) => (
         <span>{price}</span>
       </div>
       {/* Size dropdown */}
-      <div className="dropdown block relative">
-        <button className="flex justify-between items-center w-full text-grey-700 border-2 border-grey-300 px-4 py-1">
-          <span>Size</span>
-          <svg className="w-4 h-4" viewBox="0 0 20 10">
-          <polyline points="2,2 10,10 18,2" stroke="grey" strokeWidth="2" strokeLinecap="round" strokeLinejoin="milter" fill="none"/>
-        </svg>
+      <span className="text-grey-700">Size:</span>
+      <div className="w-full block relative">
+        <button
+          onClick={openDropdown}
+          className="product__dropdown w-full text-grey-700 border-2 border-grey-300 px-4 py-1">
+          <div className="flex justify-between items-center">
+            <span className="product__size--selection capitalize">Select</span>
+            <svg className="w-4 h-4" viewBox="0 0 20 10">
+              <polyline points="2,2 10,10 18,2" stroke="grey" strokeWidth="2" strokeLinecap="round" strokeLinejoin="milter" fill="none"/>
+            </svg>
+          </div>
         </button>
-        <ul className="dropdown-menu hidden">
-          {sizes.map(size => (
-            <li>{size}</li>
+        <ul className="product__dropdown--menu absolute hidden left-0 w-full text-left text-grey-700">
+          {sizes.map((size, idx) => (
+            <li key={idx}
+              onClick={updateSelection.bind(this, idx)}
+              className="product__size--item block bg-grey-200 hover:bg-grey-400 border-b border-grey-300 last:border-b-0 capitalize px-4 py-2">
+                {size}
+            </li>
           ))}
         </ul>
       </div>
