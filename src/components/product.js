@@ -5,18 +5,63 @@ import Img from 'gatsby-image'
 const openDropdown = (() => {
   const dropdownMenu = document.querySelector(".product__dropdown--menu");
   dropdownMenu.classList.toggle("hidden");
+  console.log('CLICK')
+})
+
+const openDropdownA11y = ((event) => {
+  // Return Key
+  if(event.keyCode === 13) {
+    const dropdownMenu = document.querySelector(".product__dropdown--menu");
+    dropdownMenu.classList.toggle("hidden");
+    const size = document.querySelector(".product__size--item");
+    size.focus();
+    console.log('RETURN')
+  }
 })
 
 const updateSelection = (id => {
   const sizeSelection = document.querySelector(".product__size--selection");
   const sizes = document.querySelectorAll(".product__size--item");
   [...sizes].forEach((size, idx) => {
-    console.log(size)
-    console.log(size.innerText)
     if (id === idx) {
       sizeSelection.innerText = size.innerText;
-      console.log(size.parentElement);
       size.parentElement.classList.add("hidden");
+    }
+  })
+})
+
+// Grouping controls for Accessibility
+// https://developer.mozilla.org/en-US/docs/Web/Accessibility/Keyboard-navigable_JavaScript_widgets
+const updateSelectionA11y = ((id, event) => {
+  const sizeSelection = document.querySelector(".product__size--selection");
+  const sizes = document.querySelectorAll(".product__size--item");
+  [...sizes].forEach((size, idx) => {
+    // Down Key
+    if(id === idx && event.keyCode === 40) {
+      size.setAttribute("aria-selected", "false");
+      if (size.nextElementSibling) {
+        size.nextElementSibling.focus();
+        console.log('DOWN')
+      }
+    }
+    // Up Key
+    if((id === idx && event.keyCode === 38)) {
+      size.setAttribute("aria-selected", "false");
+      if (size.previousElementSibling) {
+        size.previousElementSibling.focus();
+        console.log('UP')
+      }
+    }
+    // Return Key
+    if(id === idx && event.keyCode === 13) {
+      size.setAttribute("aria-selected", "true");
+      sizeSelection.innerText = size.innerText;
+      size.parentElement.classList.add("hidden");
+    }
+    // Tab Key
+    if(event.keyCode === 9) {
+      size.parentElement.classList.add("hidden");
+      console.log('TAB')
     }
   })
 })
@@ -47,6 +92,9 @@ const Product = ({ image, name, price, desc, sizes }) => (
       <div className="w-full block relative">
         <button
           onClick={openDropdown}
+          onKeyDown={openDropdownA11y}
+          aria-haspopup="true"
+          aria-expanded="false"
           className="product__dropdown w-full text-grey-700 border-2 border-grey-300 px-4 py-1">
           <div className="flex justify-between items-center">
             <span className="product__size--selection capitalize">Select</span>
@@ -55,10 +103,13 @@ const Product = ({ image, name, price, desc, sizes }) => (
             </svg>
           </div>
         </button>
-        <ul className="product__dropdown--menu absolute hidden left-0 w-full text-left text-grey-700">
+        <ul tabIndex="0"
+          className="product__dropdown--menu absolute hidden left-0 w-full text-left text-grey-700">
           {sizes.map((size, idx) => (
             <li key={idx}
               onClick={updateSelection.bind(this, idx)}
+              onKeyDown={updateSelectionA11y.bind(this, idx)}
+              tabIndex="-1"
               className="product__size--item block bg-grey-200 hover:bg-grey-400 border-b border-grey-300 last:border-b-0 capitalize px-4 py-2">
                 {size}
             </li>
