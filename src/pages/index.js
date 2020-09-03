@@ -1,24 +1,56 @@
 import React from "react"
-import { Link } from "gatsby"
+import { graphql, Link } from "gatsby"
+import Img from 'gatsby-image'
 
 import Layout from "../components/layout"
-import Image from "../components/image"
 import SEO from "../components/seo"
 import "../styles/main.scss"
 
-const IndexPage = () => (
+const IndexPage = ({ data }) => (
   <Layout>
     <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
+    <div>
+      <h1 className="text-center text-4xl font-headline font-semibold uppercase text-grey-700 py-4">Animated Sticker Page</h1>
+      <ul className="grid grid-cols-4 gap-4 pb-6">
+        {data.allContentfulProduct.edges.map(({ node }, idx) => (
+          <li className="bg-orange-100 border-2 border-orange-200" key={idx}>
+            <Link to={`/product/${node.slug}`}>
+              <div className="bg-white p-3">
+                <Img
+                  fluid={node.image.fluid}
+                  alt={node.name}
+                />
+              </div>
+              <div className="text-center text-grey-700 border-orange-200 border-t-2 p-1">
+                <p className="text-l">{node.name}</p>
+                <span>$ </span>
+                <span>{node.price}</span>
+              </div>
+            </Link>
+          </li>
+        ))}
+      </ul>
     </div>
-    <Link to="/page-2/">Go to page 2</Link> <br />
-    <Link to="/productList/">Go to list of products</Link> <br />
-    <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
   </Layout>
 )
 
 export default IndexPage
+
+export const query = graphql`
+  {
+    allContentfulProduct(sort: {fields: name}) {
+      edges {
+        node {
+          name
+          slug
+          price
+          image {
+            fluid(maxWidth: 400) {
+              ...GatsbyContentfulFluid_noBase64
+            }
+          }
+        }
+      }
+    }
+  }
+`
