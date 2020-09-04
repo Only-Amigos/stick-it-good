@@ -2,29 +2,41 @@ import PropTypes from "prop-types"
 import React from "react"
 import Img from 'gatsby-image'
 
-const openDropdown = (() => {
+const toggleDropdown = (() => {
   const dropdownMenu = document.querySelector(".product__dropdown--menu");
   dropdownMenu.classList.toggle("hidden");
-  console.log('CLICK')
 })
 
-const openDropdownA11y = ((event) => {
+const toggleDropdownA11y = ((event) => {
+  const dropdownMenu = document.querySelector(".product__dropdown--menu");
+  dropdownMenu.classList.add("isActive")
   // Return Key
   if(event.keyCode === 13) {
-    const dropdownMenu = document.querySelector(".product__dropdown--menu");
     dropdownMenu.classList.toggle("hidden");
     const size = document.querySelector(".product__size--item");
     size.focus();
-    console.log('RETURN')
   }
 })
 
+const closeDropdown = (() => {
+  const dropdownMenu = document.querySelector(".product__dropdown--menu");
+  const isActive = dropdownMenu.classList.contains("isActive")
+  // allows selection of list item to occur before closing menu
+  setTimeout(() => {
+    if (!isActive) {
+      dropdownMenu.classList.add("hidden");
+    }
+  }, 150);
+})
+
 const updateSelection = (id => {
+  const dropdownMenu = document.querySelector(".product__dropdown--menu");
   const sizeSelection = document.querySelector(".product__size--selection");
   const sizes = document.querySelectorAll(".product__size--item");
   [...sizes].forEach((size, idx) => {
     if (id === idx) {
       sizeSelection.innerText = size.innerText;
+      dropdownMenu.classList.remove("isActive")
       size.parentElement.classList.add("hidden");
     }
   })
@@ -33,6 +45,7 @@ const updateSelection = (id => {
 // Grouping controls for Accessibility
 // https://developer.mozilla.org/en-US/docs/Web/Accessibility/Keyboard-navigable_JavaScript_widgets
 const updateSelectionA11y = ((id, event) => {
+  const dropdownMenu = document.querySelector(".product__dropdown--menu");
   const sizeSelection = document.querySelector(".product__size--selection");
   const sizes = document.querySelectorAll(".product__size--item");
   [...sizes].forEach((size, idx) => {
@@ -41,7 +54,6 @@ const updateSelectionA11y = ((id, event) => {
       size.setAttribute("aria-selected", "false");
       if (size.nextElementSibling) {
         size.nextElementSibling.focus();
-        console.log('DOWN')
       }
     }
     // Up Key
@@ -49,19 +61,18 @@ const updateSelectionA11y = ((id, event) => {
       size.setAttribute("aria-selected", "false");
       if (size.previousElementSibling) {
         size.previousElementSibling.focus();
-        console.log('UP')
       }
     }
     // Return Key
     if(id === idx && event.keyCode === 13) {
       size.setAttribute("aria-selected", "true");
+      dropdownMenu.classList.remove("isActive")
       sizeSelection.innerText = size.innerText;
       size.parentElement.classList.add("hidden");
     }
     // Tab Key
     if(event.keyCode === 9) {
       size.parentElement.classList.add("hidden");
-      console.log('TAB')
     }
   })
 })
@@ -91,8 +102,9 @@ const Product = ({ image, name, price, desc, sizes }) => (
       <span className="text-grey-700">Size:</span>
       <div className="w-full block relative">
         <button
-          onClick={openDropdown}
-          onKeyDown={openDropdownA11y}
+          onClick={toggleDropdown}
+          onKeyDown={toggleDropdownA11y}
+          onBlur={closeDropdown}
           aria-haspopup="true"
           aria-expanded="false"
           className="product__dropdown w-full text-grey-700 border-2 border-grey-300 px-4 py-1">
