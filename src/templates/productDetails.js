@@ -1,5 +1,5 @@
 import React from 'react'
-import { graphql, Link } from "gatsby"
+import { graphql } from "gatsby"
 import { Helmet } from 'react-helmet'
 import get from 'lodash/get'
 import Layout from '../components/layout'
@@ -25,13 +25,13 @@ class ProductDetailsTemplate extends React.Component {
               sizes={product.sizes}
             />
           </div>
-          <div className="wrapper">
+          {/* <div className="wrapper">
             <div
               // dangerouslySetInnerHTML={{
               //   __html: post.body.childMarkdownRemark.html,
               // }}
             />
-          </div>
+          </div> */}
         </div>
       </Layout>
     )
