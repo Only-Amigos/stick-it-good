@@ -13,7 +13,7 @@ import Header from "./header"
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
     query SiteHeaderQuery {
-      allContentfulNav(sort: {fields: name}) {
+      allContentfulNav(sort: {fields: order}) {
         edges {
           node {
             slug
