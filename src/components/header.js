@@ -2,15 +2,16 @@ import PropTypes from "prop-types"
 import React from "react"
 import Navbar from "./navbar"
 
-const Header = ({ siteTitle }) => (
+const Header = ({ siteTitle, navItems }) => (
   <header>
-    <Navbar />
+    <Navbar navItems={navItems} />
     {/* <h1>{siteTitle}</h1> */}
   </header>
 )
 
 Header.propTypes = {
   siteTitle: PropTypes.string,
+  navItems: PropTypes.arrayOf(PropTypes.object),
 }
 
 Header.defaultProps = {

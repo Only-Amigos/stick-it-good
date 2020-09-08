@@ -12,7 +12,15 @@ import Header from "./header"
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
+    query SiteHeaderQuery {
+      allContentfulNav(sort: {fields: name}) {
+        edges {
+          node {
+            slug
+            name
+          }
+        }
+      }
       site {
         siteMetadata {
           title
@@ -23,8 +31,9 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <Header siteTitle={data.site.siteMetadata.title} />
-      <div className="container mx-auto px-32 pt-20">
+      <Header siteTitle={data.site.siteMetadata.title}
+        navItems={data.allContentfulNav.edges}/>
+      <div className="container mx-auto px-24 pt-20">
         <main>{children}</main>
         <footer>
           © {new Date().getFullYear()}, Built with
