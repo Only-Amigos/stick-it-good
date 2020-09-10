@@ -33,7 +33,7 @@ const Layout = ({ children }) => {
     <>
       <Header siteTitle={data.site.siteMetadata.title}
         navItems={data.allContentfulNav.edges}/>
-      <div className="container mx-auto px-24 pt-20">
+      <div className="container mx-auto px-10 pt-20">
         <main>{children}</main>
         <footer>
           © {new Date().getFullYear()}, Built with
