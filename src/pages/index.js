@@ -8,7 +8,7 @@ import "../styles/main.scss"
 
 const IndexPage = ({ data }) => (
   <Layout>
-    <SEO title="Home" />
+    <SEO title="Stick It Good" />
     <div>
       <h1 className="text-center text-4xl font-headline font-semibold uppercase text-grey-700 py-4">Animated Sticker Page</h1>
       <ul className="grid grid-cols-4 gap-4 pb-6">

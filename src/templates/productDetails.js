@@ -1,38 +1,25 @@
 import React from 'react'
 import { graphql } from "gatsby"
-import { Helmet } from 'react-helmet'
-import get from 'lodash/get'
 import Layout from '../components/layout'
+import SEO from "../components/seo"
 import Product from '../components/product'
-
-// import heroStyles from '../components/hero.module.css'
 
 class ProductDetailsTemplate extends React.Component {
   render() {
     const product = this.props.data.contentfulProduct;
-    const siteTitle = get(this.props, 'data.site.siteMetadata.title')
 
     return (
       <Layout location={this.props.location}>
-        <div style={{ background: '#fff' }}>
-          <Helmet title={`${product.name} | ${siteTitle}`} />
-          <div>
-            <Product
-              image={product.image.fluid}
-              name={product.name}
-              price={product.price}
-              desc={product.description.description}
-              sizes={product.sizes}
-            />
-          </div>
-          {/* <div className="wrapper">
-            <div
-              // dangerouslySetInnerHTML={{
-              //   __html: post.body.childMarkdownRemark.html,
-              // }}
-            />
-          </div> */}
-        </div>
+        <SEO title={product.name}
+          description={product.description.description}
+          keywords={`${product.name} stickers`} />
+        <Product
+          image={product.image.fluid}
+          name={product.name}
+          price={product.price}
+          desc={product.description.description}
+          sizes={product.sizes}
+        />
       </Layout>
     )
   }

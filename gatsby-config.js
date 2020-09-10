@@ -25,9 +25,10 @@ if (!spaceId || !accessToken) {
 
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `Stick It Good`,
+    description: `The ultimate place to find all your Stick It Good products.`,
+    keywords: `animated stickers, oxleberry stickers, oxleberry art`,
+    author: `@Team Amigos`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
