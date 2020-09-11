@@ -20,7 +20,7 @@ export default IndexPage
 
 export const query = graphql`
   {
-    allContentfulProduct(sort: {fields: name}, filter: {categories: {eq: "stickers"}}) {
+    allContentfulProduct(sort: {fields: name}) {
       edges {
         node {
           name

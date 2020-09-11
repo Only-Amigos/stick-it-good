@@ -4,8 +4,11 @@ const path = require('path')
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
 
+  // Making multiple create page requests
+  // https://swas.io/blog/using-multiple-queries-on-gatsbyjs-createpages-node-api/
   return new Promise((resolve, reject) => {
     const productDetails = path.resolve('./src/templates/productDetails.js')
+    const productCategories = path.resolve('./src/templates/productCategories.js')
     resolve(
       graphql(
         `
@@ -14,6 +17,13 @@ exports.createPages = ({ graphql, actions }) => {
               edges {
                 node {
                   name
+                  slug
+                }
+              }
+            }
+            allContentfulNav {
+              edges {
+                node {
                   slug
                 }
               }
@@ -33,6 +43,17 @@ exports.createPages = ({ graphql, actions }) => {
             component: productDetails,
             context: {
               slug: product.node.slug,
+            },
+          })
+        })
+
+        const categories = result.data.allContentfulNav.edges
+        categories.forEach(category => {
+          createPage({
+            path: `/${category.node.slug}/`,
+            component: productCategories,
+            context: {
+              slug: category.node.slug || '',
             },
           })
         })
