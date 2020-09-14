@@ -22,15 +22,21 @@ class ProductCategoriesTemplate extends React.Component {
 
 export default ProductCategoriesTemplate
 
+// Docs for Filtering by reference field:
+// https://www.gatsbyjs.com/docs/query-filters/#elemmatch
+// https://www.contentfulcommunity.com/t/how-do-i-filter-entries-by-category-with-graphql-and-gatsby/4189
+
 // search query `$slug` is coming from the context in gatsby-node.js
 export const query = graphql`
   query ProductByCategories($slug: String!) {
-    allContentfulProduct(sort: {fields: name}, filter: {categories: {eq: $slug}}) {
+    allContentfulProduct(sort: {fields: name}, filter: {categoriesByRefField: {elemMatch: {slug: {eq: $slug}}}}) {
       edges {
         node {
           name
           slug
-          categories
+          categoriesByRefField {
+            slug
+          }
           price
           image {
             fluid(maxWidth: 400) {
