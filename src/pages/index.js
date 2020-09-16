@@ -10,7 +10,7 @@ const IndexPage = ({ data }) => (
   <Layout>
     <SEO title="Stick It Good" />
     <div>
-      <h1 className="text-center text-4xl font-headline font-semibold uppercase text-grey-700 py-4">Stick It Good</h1>
+      <h2 className="text-center text-4xl font-headline font-semibold uppercase text-grey-700 py-8">All Items</h2>
       <PreviewCards data={data.allContentfulProduct.edges}/>
     </div>
   </Layout>
