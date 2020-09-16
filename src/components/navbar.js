@@ -14,7 +14,7 @@ const toggleMobileNav = (() => {
 const Navbar = ({ navItems }) => (
   <div>
     {/* Desktop */}
-    <nav className="fixed z-10 w-screen hidden sm:block bg-blue-800 font-headline font-light uppercase p-2">
+    <nav className="fixed z-10 w-screen hidden sm:block bg-grey-800 font-light uppercase p-2">
       <div className="max-w-screen-lg flex justify-between items-center mx-auto">
         <div className="nav__items--left flex items-center">
           <div className="w-12 mr-12">
@@ -39,7 +39,7 @@ const Navbar = ({ navItems }) => (
     </nav>
 
     {/* Mobile */}
-    <nav className="fixed z-10 w-screen flex sm:hidden flex-col items-center bg-blue-800 font-headline font-light uppercase">
+    <nav className="fixed z-10 w-screen flex sm:hidden flex-col items-center bg-grey-800 font-light uppercase">
       <button onClick={toggleMobileNav} className="w-full h-16 text-white">
         <div className="w-16 mx-auto p-2">
           <Image />

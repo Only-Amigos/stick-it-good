@@ -19,7 +19,7 @@ module.exports = {
         },
       },
       fontFamily: {
-        headline: ['"Baloo 2"', 'sans-serif'],
+        headline: ['"Poller One"', 'sans-serif'],
         sans: [
           'Lato',
           '-apple-system',
@@ -35,6 +35,13 @@ module.exports = {
           '"Segoe UI Symbol"',
           '"Noto Color Emoji"',
         ],
+      },
+      // to be used with top|right|bottom|left
+      inset: {
+        '0': '0',
+        auto: 'auto',
+        '1/2': '50%',
+        '8' : '8rem'
       },
     },
   },
