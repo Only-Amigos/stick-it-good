@@ -16,7 +16,7 @@ const Product = ({ image, name, price, desc, sizes }) => (
     </div>
 
     <div className="flex flex-col w-1/2">
-      <h3 className="text-4xl font-headline font-semibold text-grey-700">{name}</h3>
+      <h3 className="sub-header">{name}</h3>
       <div className="text-grey-700 py-4">
         <span>$ </span>
         <span>{price}</span>

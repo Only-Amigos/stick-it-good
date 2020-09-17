@@ -7,12 +7,13 @@ import PreviewCards from "../components/previewCards"
 class ProductCategoriesTemplate extends React.Component {
   render() {
     const products = this.props.data.allContentfulProduct;
+    const category = this.props.pageContext.slug;
 
     return (
       <Layout>
       <SEO title="Stick It Good" />
       <div>
-        <h1 className="text-center text-4xl font-headline font-semibold uppercase text-grey-700 py-4">Stick It Good</h1>
+        <h2 className="sub-header text-center uppercase py-8">{category}</h2>
         <PreviewCards data={products.edges}/>
       </div>
     </Layout>

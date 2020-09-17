@@ -21,6 +21,18 @@ const Layout = ({ children }) => {
           }
         }
       }
+      allContentfulHeader {
+        edges {
+          node {
+            title
+            heroImage {
+              fluid {
+                ...GatsbyContentfulFluid_noBase64
+              }
+            }
+          }
+        }
+      }
       site {
         siteMetadata {
           title
@@ -32,8 +44,9 @@ const Layout = ({ children }) => {
   return (
     <>
       <Header siteTitle={data.site.siteMetadata.title}
-        navItems={data.allContentfulNav.edges}/>
-      <div className="container mx-auto px-10 pt-20">
+        navItems={data.allContentfulNav.edges}
+        headerImage={data.allContentfulHeader.edges}/>
+      <div className="container mx-auto px-10 pt-10">
         <main>{children}</main>
         <footer>
           © {new Date().getFullYear()}, Built with
