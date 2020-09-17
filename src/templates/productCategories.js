@@ -13,7 +13,7 @@ class ProductCategoriesTemplate extends React.Component {
       <Layout>
       <SEO title="Stick It Good" />
       <div>
-        <h2 className="text-center text-4xl font-headline font-semibold uppercase text-grey-700 py-8">{category}</h2>
+        <h2 className="sub-header text-center uppercase py-8">{category}</h2>
         <PreviewCards data={products.edges}/>
       </div>
     </Layout>
