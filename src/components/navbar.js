@@ -33,7 +33,7 @@ const Navbar = ({ navItems }) => (
           </ul>
         </div>
         <div className="nav__items--right">
-          <Link className="text-white hover:text-orange-500 px-4" to={`/`}>Cart</Link>
+          <Link className="text-white hover:text-orange-500 px-4" to={`/contact/`}>Contact</Link>
         </div>
       </div>
     </nav>
